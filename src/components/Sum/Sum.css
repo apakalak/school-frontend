@@ -1,0 +1,23 @@
+.sum{
+    background-color: lightcoral;
+    padding-left: 10px;
+    margin : 10px;
+    border-radius:10px;
+    color: lightgoldenrodyellow ;
+}
+
+.sum button{
+    background-color:lightgoldenrodyellow;
+    margin: 20px 0 20px 0;
+    color :lightcoral;
+    font-size: 18px;
+    width :40px;
+    padding: 2px;
+}
+input {
+    margin-right: 20px;
+}
+
+input:focus{
+    border : 2px lightgoldenrodyellow;
+}
