@@ -5,8 +5,16 @@ import chai from 'chai'
 import sinon from 'sinon';
 
 import List from './List';
+import Box from '../box/Box';
 
 describe('List' , () => {
+    let students;
+    beforeEach(() => {
+        students = [
+            {id:3 , text:"dikshitha"},
+            {id:4 , text:"anusha"}
+        ]
+    })
      it('should render without error', () => {
         const wrapper = shallow(<List />);
         expect(wrapper).to.be.ok;
@@ -23,62 +31,29 @@ describe('List' , () => {
     })
 
     it('should render out 2 boxes', () => {
-        const students = [
-            {id:3 ,text:"dikshitha" ,css:"selected"},
-            {id:4 ,text:"anusha" , css:"empty"}
-        ]
         const wrapper = mount(<List header="Students" items ={students} />);
-        expect(wrapper.find('.items').children().length).to.equal(2);
+        expect(wrapper.find(Box).length).to.equal(2);
     })
 
     it('should render out 2 boxes with given props', () => {
-        const students = [
-            {id:3 , text:"dikshitha" , css:"selected"},
-            {id:4 , text:"anusha" , css:"empty"}
-        ]
-        const wrapper = mount(<List header="Students" items ={students} />);
-        const items = wrapper.find('.items').children()
+        const wrapper = mount(<List header="Students" items = {students} />);
+        //const items = wrapper.find('.items').children()
+        const items = wrapper.find(Box)
 
-        const item1 = items.get(0);
-        const item2 = items.get(1);
-        
-        console.log(item1.props, item2.props)
-        expect(item1.props["id"]).to.equal(3);
-        expect(item2.props["id"]).to.equal(4);
-        expect(item1.props["css"]).to.equal("selected");
-        expect(item2.props["css"]).to.equal("empty");
-        expect(item1.props["text"]).to.equal("dikshitha");
-        expect(item2.props["text"]).to.equal("anusha");
+        const item1 = items.at(0).find('div').props();
+        const item2 = items.at(1).find('div').props();
+
+        expect(item1["data-id"]).to.equal(3);
+        expect(item2["data-id"]).to.equal(4);
+        expect(item1["children"]).to.equal("dikshitha");
+        expect(item2["children"]).to.equal("anusha");
     })
 
-    // it('should get the css class from component', () => {
-    //     const wrapper = shallow(<Box css="selected"/>);
-    //     const html = wrapper.find('.box').children().get(0).props["className"]
-    //     expect(html).to.equal("selected");
-    // })
-
-    // it('should get the id  from component', () => {
-    //     const wrapper = shallow(<Box id="3"/>);
-    //     const html = wrapper.find('.box').children().get(0).props["data-id"]
-    //     expect(html).to.equal("3");
-    // })
-
-    // it('should render out full component', () => {
-    //     const wrapper = shallow(<Box css="empty" text="bob@gmail.com" id ="3"/>);
-    //     const object = wrapper.find('.box').children().get(0);
-    //     //console.log(object)
-    //     const id = object.props["data-id"]
-    //     expect(id).to.equal("3");
-    //     const text = object.props["children"]
-    //     expect(text).to.equal('bob@gmail.com');
-    //     const css = object.props["className"]
-    //     expect(css).to.equal("empty");
-    // })
-
-    // it('handle click on box', () => {
-    //     var func = sinon.stub()
-    //     const wrapper = shallow(<Box css="empty" text="bob@gmail.com" id ="3" click={func}/>);
-    //     wrapper.find('.empty').simulate('click')
-    //     expect(func.callCount).to.equal(1);
-    // })
+     it('should call fn when 2nd box is clicked', () => {
+         const stub = sinon.stub();
+         const wrapper = mount(<List click={stub} header="Students" items = {students} />);
+         wrapper.find(Box).at(1).find('div').simulate('click');
+         expect(stub.callCount).to.equal(1);
+    })
+    
 });

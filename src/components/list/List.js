@@ -10,7 +10,7 @@ export default function List (props){
             <div className="items">
                 {
                     arr.map((item,i) => 
-                        <Box key={i} text={item.text} id={item.id} css={item.css}/>
+                        <Box key={i} text={item.text} id={item.id} css="" click={props.click}/>
                     )
                 }
             </div>

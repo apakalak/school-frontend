@@ -1,0 +1,15 @@
+.items div {
+    height: 30px;
+    width:300px;
+    border:1px solid saddlebrown;
+    background-color: rosybrown;
+    color: lightgoldenrodyellow;
+    margin-bottom: 2px;
+    text-align: center;
+    border-radius:10px;
+    letter-spacing: 1px
+}
+
+.items div:hover {
+    background-color: saddlebrown;
+}

@@ -1,0 +1,32 @@
+.create-klass{
+    background-color: rosybrown;
+    padding-left: 10px;
+    padding-bottom: 10px;
+    margin : 10px;
+    border-radius:10px;
+    color: lightgoldenrodyellow;
+    width : 35%;
+}
+
+.create-klass .error{
+    color: darkred;
+}
+
+.create-klass button{
+    background-color:lightgoldenrodyellow;
+    margin: 10px 0 0 0;
+    color :rosybrown;
+    font-size: 18px;
+    width :80px;
+    padding: 2px;
+    display: block;
+}
+input,label {
+    margin-right: 20px;
+    color: black;
+    width: 90%;
+}
+
+input:focus{
+    border : 2px lightgoldenrodyellow;
+}
